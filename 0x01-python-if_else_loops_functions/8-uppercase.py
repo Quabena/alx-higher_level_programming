@@ -3,7 +3,8 @@
 def uppercase(str):
     """Prints the given string in uppercase."""
     for char in str:
+        # Convert lowercase letters to uppercase
         if ord('a') <= ord(char) <= ord('z'):
             char = chr(ord(char) - 32)
         print(char, end='')
-    print()
+    print()  # Print newline at the end
