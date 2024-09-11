@@ -15,4 +15,5 @@ def reverse_alternate_case():
         else:
             print("{}".format(chr(i - 32)), end="")  # Odd index: uppercase
 
+            
 reverse_alternate_case()
