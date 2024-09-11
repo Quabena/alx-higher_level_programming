@@ -8,5 +8,11 @@ def print_alphabet():
     using a single print function.
     The output is not followed by a new line.
     """
-    alphabet = (chr(i) for i in range(97, 123) if i != 101 and i != 113)
-    print("{}".format("".join(alphabet)), end="")
+    # Create a generator expression to filter out 'q' and 'e'
+    alphabet_generator = (
+        "{:c}".format(i) for i in range(97, 123) if i != 101 and i != 113
+    )
+
+    # Join the characters and print them without a newline
+    alphabet_str = "".join(alphabet_generator)
+    print(alphabet_str, end="")
