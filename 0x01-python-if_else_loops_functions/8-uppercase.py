@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 
 def uppercase(str):
-    """Prints the given
-    string in uppercase.
+    """
+    Prints a string in uppercase.
 
     Args:
-        str: The string to convert
-        to uppercase.
+        str (str): The string to convert to uppercase.
     """
-    uppercase = ""
-    
+    result = ""
+
     for char in str:
+        # Convert lowercase letters to uppercase
         if 'a' <= char <= 'z':
             char = chr(ord(char) - 32)
-        uppercase += char
-    print("{}".format(uppercase))
+        result += char
+
+    print("{}".format(result))
