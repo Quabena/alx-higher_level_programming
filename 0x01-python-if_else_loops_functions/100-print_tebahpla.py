@@ -8,7 +8,11 @@ def reverse_alternate_case():
     Returns:
         None
     """
-    # Initialize the starting ASCII value for 'z'
     for i in range(122, 96, -1):  # ASCII values for 'z' to 'a'
-        # Print lowercase for even values and uppercase for odd values
-        print("{}".format(chr(i) if i % 2 == 0 else chr(i - 32)), end="")
+        # Check if the current character should be uppercase or lowercase
+        if i % 2 == 0:
+            print("{}".format(chr(i)), end="")  # Even index: lowercase
+        else:
+            print("{}".format(chr(i - 32)), end="")  # Odd index: uppercase
+
+reverse_alternate_case()
