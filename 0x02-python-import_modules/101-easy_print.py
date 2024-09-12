@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-import builtins; builtins.print("#pythoniscool")
+from io import StringIO as f; f().write("#pythoniscool\n")
