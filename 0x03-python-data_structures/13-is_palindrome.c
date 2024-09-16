@@ -1,28 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
-
-/**
- * reverse_list - Reverses a singly linked list
- * @head: Pointer to the head of the list
- * Return: Pointer to the new head of the reversed list
- */
-listint_t *reverse_list(listint_t *head)
-{
-	listint_t *prev = NULL;
-	listint_t *current = head;
-	listint_t *next = NULL;
-
-	while (current != NULL)
-	{
-		next = current->next;
-		current->next = prev;
-		prev = current;
-		current = next;
-	}
-
-	return (prev);
-}
 
 /**
  * is_palindrome - Checks if a singly linked list is a palindrome
@@ -32,45 +8,87 @@ listint_t *reverse_list(listint_t *head)
 
 int is_palindrome(listint_t **head)
 {
-	listint_t *slow = *head, *fast = *head, *second_half = NULL;
-	listint_t *prev_of_slow = NULL;
-	int palindrome = 1;
+	int len, i;
+	listint_t *temp;
+	listint_t *middle;
 
-	if (*head == NULL)
+	if (head == NULL || *head == NULL)
 		return (1);
 
-	while (fast != NULL && fast->next != NULL)
+	temp = *head;
+	middle = *head;
+
+	for (len = 0; temp != NULL; len++)
+		temp = temp->next;
+
+	len = len / 2;
+
+	for (i = 1; i < len; i++)
+		middle = middle->next;
+
+	if (len % 2 != 0 && len != 1)
 	{
-		fast = fast->next->next;
-		prev_of_slow = slow;
-		slow = slow->next;
+		middle = middle->next;
+		len = len - 1;
 	}
 
-	if (fast != NULL)
-	{
-		second_half = slow->next;
-	}
-	else
-	{
-		second_half = slow;
-	}
+	reverse_list(&middle);
+	i = compare_lists(*head, middle, len);
 
-	prev_of_slow->next = NULL;
-	second_half = reverse_list(second_half);
-
-	listint_t *first_half = *head;
-
-	while (second_half != NULL)
-	{
-		if (first_half->n != second_half->n)
-		{
-			palindrome = 0;
-			break;
-		}
-
-		first_half = first_half->next;
-		second_half = second_half->next;
-	}
-
-	return (palindrome);
+	return (i);
 }
+
+/**
+* compare_lists - compare two lists
+* @head: Pointer to the head node
+* @middle: Pointer to the middle node
+* @len: Length of the list
+* Return: 1 if the same, else 0
+*/
+
+int compare_lists(listint_t *head, listint_t *middle, int len)
+{
+	int i;
+
+	if (head == NULL || middle == NULL)
+		return (1);
+
+	for (i = 0; i < len; i++)
+	{
+		if (head->n != middle->n)
+			return (0);
+
+		head = head->next;
+		middle = middle->next;
+	}
+
+	return (1);
+}
+
+/**
+ * reverse_list - Reverses a singly linked list
+ * @head: Pointer to the head of the list
+ */
+
+void reverse_list(listint_t **head)
+{
+	listint_t *current;
+	listint_t *next;
+	listint_t *prev;
+
+	if (head == NULL || *head == NULL)
+		return;
+
+	prev = NULL;
+	current = *head;
+
+	while (current != NULL)
+	{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+	}
+	*head = prev;
+}
+
