@@ -1,6 +1,8 @@
 #include <Python.h>
 #include <stdio.h>
 
+void print_python_list(PyObject *p);
+void print_python_bytes(PyObject *p);
 /**
  * print_python_list - Prints basic information about a Python list.
  * @p: The Python object to print.
@@ -11,23 +13,25 @@
  */
 void print_python_list(PyObject *p)
 {
-	if (!PyList_Check(p))
-	{
-		printf("[ERROR] Invalid List Object\n");
-		return;
-	}
+	int size, alloctd, i;
+	const char *type;
+	PyListObject *var = (PyVarObject *)p;
 
-	Py_ssize_t size = PyList_Size(p);
+	size = var->ob_size;
+	alloctd = list->allocated;
 
 	printf("[*] Python list info\n");
-	printf("[*] Size of the Python List = %zd\n", size);
-	printf("[*] Allocated = %zd\n", ((PyListObject *)p)->allocated);
+	printf("[*] Size of the Python List = %d\n", size);
+	printf("[*] Allocated = %d\n", alloctd);
 
-	for (Py_ssize_t i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 	{
-		PyObject *item = PyList_GetItem(p, i);
+		type = list->ob_item[i]->ob_type->tp-name;
+		
+		printf("Element %d: %s\n", i, type);
 
-		printf("Element %zd: %s\n", i, Py_TYPE(item)->tp_name);
+		if (strcmp(type, "bytes") == 0)
+			print_python_bytes(list->ob_item[i]);
 	}
 }
 
@@ -45,25 +49,35 @@ void print_python_list(PyObject *p)
 
 void print_python_bytes(PyObject *p)
 {
-	if (!PyBytes_Check(p))
+	unsigned char i, size;
+	PyBytesObject *bytes = (PyBytesObject *)p;
+
+	printf("[.] bytes object info\n");
+
+	if (strcmp(p->ob_type->tp-name, "bytes") != 0)
 	{
-		printf("[ERROR] Invalid Bytes Object\n");
+		printf(" [ERROR] Invalid Bytes Object\n");
 		return;
 	}
 
-	Py_ssize_t size = PyBytes_Size(p);
+	printf(" size: %ld\n", ((PyVarObject *)p)->ob_size);
+	printf(" trying string: %s\n", bytes->ob_sval);
 
-	printf("[*] Python bytes info\n");
-	printf("[*] Size of the Python Bytes = %zd\n", size);
+	if (((PyVarObject *)p)->ob_size > 10)
+		size = 10;
+	else
+		size = ((PyVarObject *)p)->ob_size + 1;
 
-	char *buffer = PyBytes_AsString(p);
+	printf(" first %d bytes: ", size);
 
-	printf("[*] First %zd bytes: ", size < 10 ? size : 10);
-
-	for (Py_ssize_t i = 0; i < (size < 10 ? size : 10); i++)
+	for (i = 0; i < size; i++)
 	{
-		printf("%02x ", (unsigned char)buffer[i]);
+		printf("%02hhx", bytes->ob_sval[i]);
+
+		if (i == (size - 1))
+			printf("\n");
+		else
+			printf(" ");
 	}
-	printf("\n");
 }
 
