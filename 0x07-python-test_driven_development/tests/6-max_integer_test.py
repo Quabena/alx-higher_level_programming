@@ -18,8 +18,8 @@ class TestMaxInteger(unittest.TestCase):
         unordered = [1, 2, 4, 3]
         self.assertEqual(max_integer(unordered), 4)
 
-    def test_max_at_begginning(self):
-        """Test a list with a beginning max value."""
+    def test_max_at_beginning(self):
+        """Test a list with the max value at the beginning."""
         max_at_beginning = [4, 3, 2, 1]
         self.assertEqual(max_integer(max_at_beginning), 4)
 
@@ -46,7 +46,7 @@ class TestMaxInteger(unittest.TestCase):
     def test_string(self):
         """Test a string."""
         string = "Ehoneah"
-        self.assertEqual(max_integer(string), 'r')
+        self.assertEqual(max_integer(string), 'o')
 
     def test_list_of_strings(self):
         """Test a list of strings."""
@@ -56,6 +56,7 @@ class TestMaxInteger(unittest.TestCase):
     def test_empty_string(self):
         """Test an empty string."""
         self.assertEqual(max_integer(""), None)
+
 
 if __name__ == '__main__':
     unittest.main()
