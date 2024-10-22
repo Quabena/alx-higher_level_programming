@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-"""This module defines a base model class"""
-import os
+"""Defines a base model class."""
+import json
 import csv
 import turtle
-import json
 
 
 class Base:
-    """Represents the base model.
+    """Represent the base model.
 
     Represents the "base" for all other classes in project 0x0C*.
 
