@@ -1,31 +1,31 @@
 #!/usr/bin/node
 /**
- * A class that defines a rectangle 
+ * A class that defines a rectangle.
+ * 
+ * Attributes:
+ * - width: The width of the rectangle.
+ * - height: The height of the rectangle.
  */
+
 class Rectangle {
   constructor (w, h) {
     if (typeof w === 'number' && w > 0 && typeof h === 'number' && h > 0) {
       this.width = w;
       this.height = h;
+    } else {
+      this.width = 0;
+      this.height = 0;
     }
   }
 
   print () {
     for (let i = 0; i < this.height; i++) {
-      let myVar = '';
-      let y = 0;
-      while (y < this.width) {
-        myVar += 'X';
-        y++;
-      }
-
-      console.log(myVar);
+      console.log('X'.repeat(this.width)); // Simplified printing
     }
   }
 
   rotate () {
-    let temp = 0;
-    temp = this.width;
+    const temp = this.width;
     this.width = this.height;
     this.height = temp;
   }
@@ -35,4 +35,5 @@ class Rectangle {
     this.height *= 2;
   }
 }
+
 module.exports = Rectangle;
