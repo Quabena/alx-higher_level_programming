@@ -1,4 +1,8 @@
 #!/usr/bin/node
+/**
+ * A square class that inherits a from rectangle class
+ */
+
 const Rectangle = require('./4-rectangle');
 
 class Square extends Rectangle {
