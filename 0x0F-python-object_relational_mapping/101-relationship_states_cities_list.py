@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all State objects and corresponding City objects contained in the DB
+Lists all State objects and corresponding City objects in the database
 """
 import sys
 from relationship_state import Base, State

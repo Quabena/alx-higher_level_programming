@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all City objects from the database hbtn_0e_101_usa
+Lists all City objects from the `hbtn_0e_101_usa` database
 """
 import sys
 from relationship_state import Base, State

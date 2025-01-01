@@ -1,18 +1,12 @@
 #!/usr/bin/python3
 """
- Script that lists all cities from
-the database `hbtn_0e_4_usa`.
+Lists all cities from the `hbtn_0e_4_usa` database.
 """
 
 import MySQLdb as db
 from sys import argv
 
 if __name__ == '__main__':
-    """
-    Access the database and get the cities
-    from the database.
-    """
-
     db_connect = db.connect(host="localhost", port=3306,
                             user=argv[1], passwd=argv[2], db=argv[3])
 
