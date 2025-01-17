@@ -10,7 +10,7 @@ import sys
 
 if __name__ == "__main__":
     # Getting the letter argument. Empty string if none provided.
-    letter = sys.argv[1] if len(sys.argv) >= 2 else""
+    letter = sys.argv[1] if len(sys.argv) > 1 else ""
     payload = {'q': letter}
 
     try:
