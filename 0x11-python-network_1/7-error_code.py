@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+"""
+A Python script that takes in a URL, sends a request to the
+URL and displays the body of the response.
+"""
+
+import requests
+import sys
+
+if __name__ == "__main__":
+    # Retrieving the URL from the cmd-line arguments
+    url = sys.argv[1]
+
+    # Sending a GET request to the URL
+    response = requests.get(url)
+
+    # Checking if the status code indicates an error
+    if response.status_code >= 400:
+        print(f"Error code: {response.status_code}")
+    else:
+        # Displaying/Printing the response body
+        print(response.text)
