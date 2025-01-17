@@ -1,23 +1,17 @@
 #!/usr/bin/python3
+"""Lists the 10 most recent commits on a given GitHub repository.
+Usage: ./100-github_commits.py <repository name> <repository owner>
 """
-This script lists the 10 most recent commits of a repository
-owned by a specified user, using the GitHub API.
-"""
-
-import requests
 import sys
+import requests
+
 
 if __name__ == "__main__":
-    # GEtting repository name and owner from cmd-line argument
-    repo_name = argv[1]
-    owner_name = sys.argv[2]
+    url = "https://api.github.com/repos/{}/{}/commits".format(
+        sys.argv[2], sys.argv[1])
 
-    # GitHub API url for the commits endpoint
-    url = f"https://api.github.com/repos/{}/{}/commits".format(
-        owner_name, repo_name)
-
-    response = requests.get(url)
-    commits = response.json()
+    r = requests.get(url)
+    commits = r.json()
     try:
         for i in range(10):
             print("{}: {}".format(
