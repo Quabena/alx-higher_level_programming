@@ -13,22 +13,15 @@ if __name__ == "__main__":
     owner_name = sys.argv[2]
 
     # GitHub API url for the commits endpoint
-    url = f"https://api.github.com/repos/{owner_name}/{repo_name}/commits"
+    url = f"https://api.github.com/repos/{}/{}/commits".format(
+        owner_name, repo_name)
 
+    response = requests.get(url)
+    commits = response.json()
     try:
-        # Sending a GET request to the API
-        response = requests.get(url)
-        # Raising an error for HTTP codes >= 400
-        response.raise_for_status()
-
-        # Parsing the JSON response
-        commits = reponse.json()
-
-        # Printing/Displaying the 10 most recent commits
-        for commit in commits[:10]:
-            sha = commit.get("sha")
-            author = commit.get("commit", {}).get("author", {}).get("name")
-            print(f"{sha}: {author}")
-    except requests.exceptions.RequestException as e:
-        # HTTP or connection-related errors
-        print(f"Error: {e}")
+        for i in range(10):
+            print("{}: {}".format(
+                commits[i].get("sha"),
+                commits[i].get("commit").get("author").get("name")))
+    except IndexError:
+        pass
