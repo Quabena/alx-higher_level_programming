@@ -26,6 +26,6 @@ if __name__ == "__main__":
             print(user_data.get("id"))
         else:
             print("None")
-    exception Exception as e:
+    except Exception as e:
         # Print 'None' for any errors
         print("None")
