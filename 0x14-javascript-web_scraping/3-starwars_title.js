@@ -1,16 +1,17 @@
 #!/usr/bin/node
 
-// Import the 'request' module
+// Import the 'request' library for making HTTP requests
 const request = require('request');
 
-// Get the movie ID from the first command-line argument
+// Get the movie ID from the command-line arguments
 const movieId = process.argv[2];
 
-// Construct the API URL using the movie ID
-const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+// Construct the URL for the Star Wars API using the movie ID
+const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
 
-// Send a GET request to the Star Wars API
-request(apiUrl, (error, response, body) => {
+// Make an HTTP GET request to the Star Wars API
+request.get(url, (error, response, body) => {
+  // If an error occurred during the request, log it to the console
   if (error) {
     console.log(error);
   } else {
